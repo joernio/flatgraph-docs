@@ -3,17 +3,9 @@
   <channel>
     <title>flatgraph</title>
     <link>http://localhost:1313/index.html</link>
-    <description></description>
+    <description>flatgraph is a fast and memory efficient columnar graph database written in Scala 3.&#xA;Links git repository Releases </description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 13 May 2024 11:23:18 +0200</lastBuildDate>
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Home</title>
-      <link>http://localhost:1313/home/index.html</link>
-      <pubDate>Mon, 13 May 2024 11:23:18 +0200</pubDate>
-      <guid>http://localhost:1313/home/index.html</guid>
-      <description>foo bar</description>
-    </item>
   </channel>
 </rss>
