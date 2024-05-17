@@ -5,18 +5,26 @@
     <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <meta name="generator" content="Hugo 0.123.7">
     <meta name="generator" content="Relearn 6.0.0+tip">
-    <meta name="description" content="">
+    <meta name="description" content="The most important basic traversal steps will be the ones generated for your domain as highlighted in glimpse-of-a-simple-use-case.
+In addition to the generated domain-specific steps based on your schema, there’s some basic traversal steps that you can use generically across domains, e.g. to traverse from a node (or an Iterator[Node]) to their neighbors, lookup their properties etc. There are also more advanced steps like repeat and advanced features like path tracking which will be described further below.">
     <meta name="author" content="">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Tags :: flatgraph">
-    <meta property="og:url" content="http://localhost:1313/tags/index.html">
+    <meta name="twitter:title" content="Traversal steps :: flatgraph">
+    <meta name="twitter:description" content="The most important basic traversal steps will be the ones generated for your domain as highlighted in glimpse-of-a-simple-use-case.
+In addition to the generated domain-specific steps based on your schema, there’s some basic traversal steps that you can use generically across domains, e.g. to traverse from a node (or an Iterator[Node]) to their neighbors, lookup their properties etc. There are also more advanced steps like repeat and advanced features like path tracking which will be described further below.">
+    <meta property="og:url" content="http://localhost:1313/traversals/index.html">
     <meta property="og:site_name" content="flatgraph">
-    <meta property="og:title" content="Tags :: flatgraph">
+    <meta property="og:title" content="Traversal steps :: flatgraph">
+    <meta property="og:description" content="The most important basic traversal steps will be the ones generated for your domain as highlighted in glimpse-of-a-simple-use-case.
+In addition to the generated domain-specific steps based on your schema, there’s some basic traversal steps that you can use generically across domains, e.g. to traverse from a node (or an Iterator[Node]) to their neighbors, lookup their properties etc. There are also more advanced steps like repeat and advanced features like path tracking which will be described further below.">
     <meta property="og:locale" content="en-us">
     <meta property="og:type" content="website">
-    <meta itemprop="name" content="Tags :: flatgraph">
-    <title>Tags :: flatgraph</title>
-    <link href="/tags/index.xml" rel="alternate" type="application/rss+xml" title="Tags :: flatgraph">
+    <meta itemprop="name" content="Traversal steps :: flatgraph">
+    <meta itemprop="description" content="The most important basic traversal steps will be the ones generated for your domain as highlighted in glimpse-of-a-simple-use-case.
+In addition to the generated domain-specific steps based on your schema, there’s some basic traversal steps that you can use generically across domains, e.g. to traverse from a node (or an Iterator[Node]) to their neighbors, lookup their properties etc. There are also more advanced steps like repeat and advanced features like path tracking which will be described further below.">
+    <meta itemprop="wordCount" content="186">
+    <title>Traversal steps :: flatgraph</title>
+    <link href="/traversals/index.xml" rel="alternate" type="application/rss+xml" title="Traversal steps :: flatgraph">
     <link href="/css/fontawesome-all.min.css?1715946964" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1715946964" rel="stylesheet"></noscript>
     <link href="/css/nucleus.css?1715946964" rel="stylesheet">
     <link href="/css/auto-complete.css?1715946964" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1715946964" rel="stylesheet"></noscript>
@@ -69,7 +77,7 @@
 </style>
 
   </head>
-  <body class="mobile-support html" data-url="/tags/index.html">
+  <body class="mobile-support html" data-url="/traversals/index.html">
     <div id="R-body" class="default-animation">
       <div id="R-body-overlay"></div>
       <nav id="R-topbar">
@@ -80,15 +88,22 @@
             </div>
             <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
               <div class="topbar-content">
-                <div class="topbar-content-wrapper">
-<nav class="TableOfContents"></nav>
+                <div class="topbar-content-wrapper"><nav class="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
                 </div>
               </div>
             </div>
           </div>
           <ol class="topbar-breadcrumbs breadcrumbs highlightable" itemscope itemtype="http://schema.org/BreadcrumbList"><li
             itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/index.html"><span itemprop="name">flatgraph</span></a><meta itemprop="position" content="1">&nbsp;>&nbsp;</li><li
-            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">Tags</span><meta itemprop="position" content="2"></li>
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">Traversal steps</span><meta itemprop="position" content="2"></li>
           </ol>
           <div class="topbar-area topbar-area-end" data-area="end">
             <div class="topbar-button topbar-button-prev" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/index.html" title="flatgraph (🡐)"><i class="fa-fw fas fa-chevron-left"></i></a>
@@ -109,14 +124,65 @@
       <div id="R-main-overlay"></div>
       <main id="R-body-inner" class="highlightable default" tabindex="-1">
         <div class="flex-block-wrapper">
-          <article>
+          <article class="default">
             <header class="headline">
             </header>
-<h1 id="tags">Tags</h1>
+
+<h1 id="traversal-steps">Traversal steps</h1>
+
+<p>The most important basic traversal steps will be the ones generated for your domain as highlighted in <a href="/traversals/index.html#glimpse-of-a-simple-use-case">glimpse-of-a-simple-use-case</a>.</p>
+<p>In addition to the generated domain-specific steps based on your schema, there&rsquo;s some basic traversal steps that you can use generically across domains, e.g. to traverse from a node (or an <code>Iterator[Node]</code>) to their neighbors, lookup their properties etc.
+There are also more advanced steps like <code>repeat</code> and advanced features like path tracking which will be described further below.</p>
+
+<div class="box notices cstyle tip">
+  <div class="box-label"><i class="fa-fw fas fa-lightbulb"></i> Tip</div>
+  <div class="box-content">
+
+<p>flatgraph traversals are based on Scala&rsquo;s Iterator, so you can also use all regular <a href="https://docs.scala-lang.org/scala3/book/collections-methods.html" rel="external" target="_blank">collection methods</a>.</p>
+</div>
+</div>
+<h4 id="basic-steps">Basic steps</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Default</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>page</strong></td>
+<td><em>&lt;empty&gt;</em></td>
+<td>Mandatory reference to the page.</td>
+</tr>
+<tr>
+<td><strong>onempty</strong></td>
+<td><code>disable</code></td>
+<td>Defines what to do with the button if the content overlay is empty:<!-- raw HTML omitted --><!-- raw HTML omitted -->- <code>disable</code>: The button is displayed in disabled state.<!-- raw HTML omitted -->- <code>hide</code>: The button is removed.</td>
+</tr>
+<tr>
+<td><strong>onwidths</strong></td>
+<td><em>&lt;varying&gt;</em></td>
+<td>The action, that should be executed if the site is displayed in the given width:<!-- raw HTML omitted --><!-- raw HTML omitted -->- <code>show</code>: The button is displayed in its given area<!-- raw HTML omitted -->- <code>hide</code>: The button is removed.<!-- raw HTML omitted -->- <code>area-XXX</code>: The button is moved from its given area into the area <code>XXX</code>.</td>
+</tr>
+<tr>
+<td><strong>onwidthm</strong></td>
+<td><em>&lt;varying&gt;</em></td>
+<td>See above.</td>
+</tr>
+<tr>
+<td><strong>onwidthl</strong></td>
+<td><em>&lt;varying&gt;</em></td>
+<td>See above.</td>
+</tr>
+</tbody>
+</table>
 
             <footer class="footline">
             </footer>
-          </article>        </div>
+          </article>
+        </div>
       </main>
     </div>
     <aside id="R-sidebar" class="default-animation">
@@ -177,7 +243,7 @@
       <div id="R-content-wrapper" class="highlightable">
         <div id="R-topics">
           <ul class="enlarge morespace collapsible-menu">
-          <li data-nav-id="/traversals/index.html" class=""><a class="padding" href="/traversals/index.html">Traversal steps</a></li>
+          <li data-nav-id="/traversals/index.html" class="active"><a class="padding" href="/traversals/index.html">Traversal steps</a></li>
           </ul>
         </div>
         <div id="R-shortcuts">
@@ -199,7 +265,7 @@
                   <div class="control-style">
                     <label class="a11y-only" for="R-select-language">Language</label>
                     <select id="R-select-language" onchange="location = this.querySelector( this.value ).dataset.url;">
-                      <option id="R-select-language-en" value="#R-select-language-en" data-url="/tags/index.html" lang="en-us" selected></option>
+                      <option id="R-select-language-en" value="#R-select-language-en" data-url="/traversals/index.html" lang="en-us" selected></option>
                     </select>
                   </div>
                   <div class="clear"></div>

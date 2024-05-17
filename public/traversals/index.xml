@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Traversal steps :: flatgraph</title>
+    <link>http://localhost:1313/traversals/index.html</link>
+    <description>The most important basic traversal steps will be the ones generated for your domain as highlighted in glimpse-of-a-simple-use-case.&#xA;In addition to the generated domain-specific steps based on your schema, there’s some basic traversal steps that you can use generically across domains, e.g. to traverse from a node (or an Iterator[Node]) to their neighbors, lookup their properties etc. There are also more advanced steps like repeat and advanced features like path tracking which will be described further below.</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <atom:link href="http://localhost:1313/traversals/index.xml" rel="self" type="application/rss+xml" />
+  </channel>
+</rss>

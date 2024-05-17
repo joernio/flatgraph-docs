@@ -3,9 +3,16 @@
   <channel>
     <title>flatgraph</title>
     <link>http://localhost:1313/index.html</link>
-    <description>flatgraph is a fast and memory efficient columnar graph database written in Scala 3.&#xA;Links git repository Releases </description>
+    <description>flatgraph is a fast and memory efficient columnar graph database with support for domain specific and typesafe traversal language. Written in Scala 3.&#xA;flatgraph was developed as the underlying database for the code analysis platform joern as well as qwiet.ai’s proprietary static code analysis tools. Many design decisions were driven by the needs of code analysis, however we are certain that flatgraph is useful for other domains as well, and we’ve tried our best to make it easy to give it a go.</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Traversal steps</title>
+      <link>http://localhost:1313/traversals/index.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/traversals/index.html</guid>
+      <description>The most important basic traversal steps will be the ones generated for your domain as highlighted in glimpse-of-a-simple-use-case.&#xA;In addition to the generated domain-specific steps based on your schema, there’s some basic traversal steps that you can use generically across domains, e.g. to traverse from a node (or an Iterator[Node]) to their neighbors, lookup their properties etc. There are also more advanced steps like repeat and advanced features like path tracking which will be described further below.</description>
+    </item>
   </channel>
 </rss>

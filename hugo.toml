@@ -2,3 +2,18 @@ baseURL = 'https://example.org/'
 languageCode = 'en-us'
 title = 'flatgraph'
 theme = 'relearn'
+
+[params]
+  themeVariant = 'learn'
+  disableLandingPageButton = true
+  disableShortcutsTitle = true
+
+[[menu.shortcuts]]
+  name = "<i class='fa-fw fab fa-github'></i> GitHub repo"
+  url = "https://github.com/joernio/flatgraph"
+  weight = 10
+
+[[menu.shortcuts]]
+  name = "<img src='https://maven-badges.herokuapp.com/maven-central/io.joern/flatgraph-core_3/badge.svg' alt='latest release' />"
+  url = "https://maven-badges.herokuapp.com/maven-central/io.joern/flatgraph-core_3"
+  weight = 20
