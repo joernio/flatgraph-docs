@@ -1,6 +1,6 @@
 +++
 title = "Traversal steps"
-weight = 2
+weight = 3
 +++
 
 The most important basic traversal steps will be the ones generated for your domain as highlighted in [glimpse-of-a-simple-use-case](index.html#glimpse-of-a-simple-use-case).
@@ -14,6 +14,7 @@ flatgraph traversals are based on Scala's Iterator, so you can also use all regu
 
 
 #### Basic steps
+Assuming you have an `Iterator[X]`, where `X` is typically a domain specific type, but could also be flatgraph's root type for nodes [`GNode`](https://github.com/joernio/flatgraph/blob/92f4cc4b84bf6b8315971128995a75872376dcff/core/src/main/java/flatgraph/GNode.java), here's a (non-exhaustive) list of basic traversal steps.
 
 | Name                  | Default           | Notes       |
 |-----------------------|-------------------|-------------|

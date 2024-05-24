@@ -67,23 +67,35 @@ flatgraph uses an efficient columnar layout to make most of your available heap.
 
 # TODOs
 * full setup with sbt and codegen plugin: on separate page, link here
-  * node specific starter steps, regex filter steps, number filter steps, boolean filter steps
+  * setup example repo and describe here
+    * demo node specific starter steps, regex filter steps, number filter steps, boolean filter steps
+  * explain concepts of `NewNode` and StoredNode
+  * graph modifications all go via the DiffGraph api. Prefer few large DiffGraph applications over many small ones, since the cost of applying a DiffGraph is almost independent of it's size. 
+  * DiffGraphs: cost of 
+  * link to the tests in the flatgraph repo
   * link to this page in traversal steps
-* graph traversals (a.k.a. steps)
-  * start with a domain setup and the domain specific steps
+  * link to codepropertygraph
+* generic graph traversals (a.k.a. steps)
+  * based on the  always double check the result type 
   * copy from joern docs traversal-basics.md
   * l/toSet/toSeq
-  * out/in/label
+  * propertyMap
+  * property
+  * out/in/label -> only for nodes
   * nodeCount
   * groupCount
   * size
   * collectAll / collect
+  * cast[]
   * filter/filterNot
   * where/whereNot
   * copy some basics from joern
   * repeat and friends
   * path tracking
-  * go through the remainder of the flatgraph api
+  * go through the remainder of the flatgraph api (incl all extension steps)
+  * describe and verify what imports are required for those steps
+  * describe the difference of steps between Iterator[X] and X
+    * also describe .start step
 * algorithms: e.g. shortest path
 * import/export formats
 * benchmarks: copy from readme
