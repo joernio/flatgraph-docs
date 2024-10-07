@@ -3,12 +3,13 @@ archetype = "home"
 title = "flatgraph"
 +++
 
-[flatgraph](https://github.com/joernio/flatgraph) is a fast and memory efficient columnar graph database with support for domain specific and typesafe traversal language. Written in [Scala 3](https://www.scala-lang.org/).
+[flatgraph](https://github.com/joernio/flatgraph) is a fast and memory efficient columnar graph database with a framework to generate domain specific and typesafe traversals. 
+Model your domain in flatgraph's schema builder ([examples](https://github.com/joernio/flatgraph/tree/master/test-schemas/src/main/scala/flatgraph/testdomains)) and the code generator will generate all required classes and steps required to traverse your domain in a graph as well persistence. Note: flatgraph is not supposed to be a full ACID compliant database - our design goals are efficiency, minimalism, simplicity and rapid prototyping. 
 
-flatgraph was developed as the underlying database for the code analysis platform [joern](https://joern.io) as well as [qwiet.ai's](https://qwiet.ai/) proprietary static code analysis tools. Many design decisions were driven by the needs of code analysis, however we are certain that flatgraph is useful for other domains as well, and we've tried our best to make it easy to give it a go. 
+flatgraph is developed and maintained as the underlying database for the code analysis platform [joern](https://joern.io) as well as [qwiet.ai's](https://qwiet.ai/) proprietary static code analysis tools. Many design decisions were driven by the needs of code analysis, but flatgraph is useful for other domains as well, and since we love open source (and hope to get bug reports and feature contributions back), we decided to share it with the world. 
 
 ## Main characteristics / design decisions
-* flatgraph runs locally in a JVM
+* runs locally in a JVM (written in [Scala 3](https://www.scala-lang.org/))
 * provides a DSL to model your domain-specific graph schema
 * code generator creates a domain specific typesafe query language
 * code generator can be used programmatically or as an sbt plugin
@@ -19,10 +20,11 @@ flatgraph was developed as the underlying database for the code analysis platfor
 * transactions, and therefor all ACID properties (atomicity, consistency, isolation, durability)
 * fail safety: flatgraph does not create a write-ahead log - this is not a design decision though and could be implemented if needed
 * remoting: flatgraph does not provide a client in order to connect to a remote flatgraph instance and/or manage concurrent clients
+* clustering: flatgraph does not support multiple instances that coordinate each other
 * swapping to disk: your graph will need to fit into the heap at all times
 
 ## Glimpse of a simple use case
-I have a history in [tinkerpop](https://tinkerpop.apache.org), so allow me to take a very simple graph domain from there to show how to get started with flatgraph. Working code is often better than prose: and the full setup is part of the tests in the [flatgraph repository](https://github.com/joernio/flatgraph).
+We have a history in [tinkerpop](https://tinkerpop.apache.org), so allow us to use a very simple graph domain from there to show how to get started with flatgraph. Working code is typically better than prose: the full setup is part of the tests in the [flatgraph repository](https://github.com/joernio/flatgraph).
 {{< figure src="/grateful-dead-schema.png" caption="grateful dead sample domain">}}
 
 Excerpt from the [GratefulDead domain schema](https://github.com/joernio/flatgraph/blob/44005cf16373dfaf629da8628071ebbfaf02b551/test-schemas/src/main/scala/flatgraph/testdomains/GratefulDead.scala):
@@ -65,9 +67,13 @@ The full working test is [here](https://github.com/joernio/flatgraph/blob/92f4cc
 ## Memory footprint
 flatgraph uses an efficient columnar layout to make most of your available heap. The actual space required depends on your domain, but to get a rough idea we can look at some numbers from the code analysis tool [joern](https://joern.io): for the analysis of the linux networking driver source, joern creates a flatgraph instance with 9m nodes, 88m node properties, 84m edges and 19m edge properties. This requires 3.7G heap, and if we persist it to disk storage it takes up 300MB. 
 
+## Dependencies
+We tried to streamline the dependency tree as much as possible: flatgraph-core most notably depends on [zstd-jni](https://github.com/luben/zstd-jni) (fast compression for storage), [Scala 3](https://www.scala-lang.org/) and [ujson](https://com-lihaoyi.github.io/upickle/#uJson). 
+
+
 # TODOs
 * full setup with sbt and codegen plugin: on separate page, link here
-  * setup example repo and describe here
+* setup example repo and describe here
     * demo node specific starter steps, regex filter steps, number filter steps, boolean filter steps
   * explain concepts of `NewNode` and StoredNode
   * graph modifications all go via the DiffGraph api. Prefer few large DiffGraph applications over many small ones, since the cost of applying a DiffGraph is almost independent of it's size. 
@@ -79,7 +85,7 @@ flatgraph uses an efficient columnar layout to make most of your available heap.
   * based on the  always double check the result type 
   * copy from joern docs traversal-basics.md
   * l/toSet/toSeq
-  * propertyMap
+  * properties
   * property
   * out/in/label -> only for nodes
   * nodeCount
