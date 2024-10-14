@@ -3,7 +3,7 @@ title = "Traversal steps"
 weight = 3
 +++
 
-The most important basic traversal steps will be the ones generated for your domain as highlighted in [glimpse-of-a-simple-use-case](index.html#glimpse-of-a-simple-use-case).
+The most important basic traversal steps will be the ones generated for your domain as highlighted in [glimpse-of-a-simple-use-case](../_index.html#glimpse-of-a-simple-use-case).
 
 In addition to the generated domain-specific steps based on your schema, there's some basic traversal steps that you can use generically across domains, e.g. to traverse from a node (or an `Iterator[Node]`) to their neighbors, lookup their properties etc. 
 There are also more advanced steps like `repeat` and advanced features like path tracking which will be described further below. 
