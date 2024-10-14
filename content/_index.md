@@ -84,24 +84,7 @@ We tried to streamline the dependency tree as much as possible: flatgraph-core m
 * generic graph traversals (a.k.a. steps)
   * based on the  always double check the result type 
   * copy from joern docs traversal-basics.md
-  * l/toSet/toSeq
-  * properties
-  * property
-  * out/in/label -> only for nodes
-  * nodeCount
-  * groupCount
-  * size
-  * collectAll / collect
-  * cast[]
-  * filter/filterNot
-  * where/whereNot
-  * copy some basics from joern
-  * repeat and friends
-  * path tracking
-  * go through the remainder of the flatgraph api (incl all extension steps)
-  * describe and verify what imports are required for those steps
   * describe the difference of steps between Iterator[X] and X
-    * also describe .start step
 * algorithms: e.g. shortest path
 * import/export formats
 * benchmarks: copy from readme
@@ -110,6 +93,4 @@ We tried to streamline the dependency tree as much as possible: flatgraph-core m
   * replace / get rid of the relearn logo
 * go through TODOs in text above
 * bring online
-  * host on github pages?
-  * configure url in hugo.toml
   * link from flatgraph repo

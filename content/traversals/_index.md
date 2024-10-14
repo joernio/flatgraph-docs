@@ -9,9 +9,13 @@ In addition to the generated domain-specific steps based on your schema, there's
 There are also more advanced steps like `repeat` and advanced features like path tracking which will be described further below. 
 
 {{% notice tip %}}
-flatgraph traversals are based on Scala's Iterator, so you can also use all regular [collection methods](https://docs.scala-lang.org/scala3/book/collections-methods.html). 
+flatgraph traversals are based on Scala's Iterator, so you can also use all regular [collection methods](https://docs.scala-lang.org/scala3/book/collections-methods.html). If you want to begin a traversal from a given node, the `.start` method will wrap that node in a traversal making the traversal steps available.
 {{% /notice %}}
 
+
+## Traversal Steps
+
+The steps described below are available when called on an `Iterator`. For these to be available, the following packaged must be imported, i.e., `import flatgraph.traversal.language.*`.
 
 #### Basic steps
 Assuming you have an `Iterator[X]`, where `X` is typically a domain specific type, but could also be flatgraph's root type for nodes [`GNode`](https://github.com/joernio/flatgraph/blob/92f4cc4b84bf6b8315971128995a75872376dcff/core/src/main/java/flatgraph/GNode.java), here's a (non-exhaustive) list of basic traversal steps.
@@ -50,17 +54,6 @@ Assuming you have an `Iterator[X]`, where `X` is typically a domain specific typ
 | **where**               | Filter      | Only preserves elements if the provided traversal has at least one result.                                  |
 | **whereNot**            | Filter      | Only preserves elements if the provided traversal does _not_ have any results.                              |
 
-
-#### Graph Steps
-
-When starting the traversal from the graph object, i.e., an instance of [`Graph`](https://github.com/joernio/flatgraph/blob/92f4cc4b84bf6b8315971128995a75872376dcff/core/src/main/scala/flatgraph/Graph.scala).
-
-| Name          | Type | Notes |
-| ------------- | ---- | ----- |
-| **edgeCount** | Map  | Graph | The total edges in the graph. |
-| **nodeCount** | Map  | Graph | Total nodes in the graph.     |
-
-
 #### Node Steps
 
 When starting the traversal from an `Iterator` of nodes [`GNode`](https://github.com/joernio/flatgraph/blob/92f4cc4b84bf6b8315971128995a75872376dcff/core/src/main/java/flatgraph/GNode.java).
@@ -80,8 +73,6 @@ When starting the traversal from an `Iterator` of nodes [`GNode`](https://github
 | **label**         | Map/Filter | Node label. Can filter by given labels.                                                  |
 | **labelNot**      | Filter     | Inverse of `label`.                                                                      |
 
-
-
 #### Edge Steps
 
 When starting the traversal from an `Iterator` of nodes [`Edge`](https://github.com/joernio/flatgraph/blob/92f4cc4b84bf6b8315971128995a75872376dcff/core/src/main/scala/flatgraph/Edge.scala).
@@ -91,3 +82,38 @@ When starting the traversal from an `Iterator` of nodes [`Edge`](https://github.
 | **src** | Map  | Traverse to the source node (out-going node).     |
 | **dst** | Map  | Traverse to the destination node (incoming node). |
 
+## Entity Steps
+
+The steps described below are available when called on the entity/object directly. These are available as methods or properties on the objects so no import is necessary.
+
+#### Graph Steps
+
+Steps available from an instance of [`Graph`](https://github.com/joernio/flatgraph/blob/92f4cc4b84bf6b8315971128995a75872376dcff/core/src/main/scala/flatgraph/Graph.scala).
+
+| Name          | Type     | Notes                                                                              |
+| ------------- | -------- | ---------------------------------------------------------------------------------- |
+| **allNodes**  | Map      | The nodes of the graph.                                                            |
+| **allEdges**  | Map      | The edges of the graph.                                                            |
+| **edgeCount** | Terminal | The total edges in the graph. Can be restricted by a given label.                  |
+| **nodes**     | Filter   | Create a traversal from the nodes of the graph that match the given IDs or labels. |
+| **nodeCount** | Terminal | Total nodes in the graph. Can be restricted by a given label.                      |
+
+#### Edge Steps
+
+Steps available from an instance of [`Edge`](https://github.com/joernio/flatgraph/blob/92f4cc4b84bf6b8315971128995a75872376dcff/core/src/main/scala/flatgraph/Edge.scala).
+
+| Name             | Type | Notes                                          |
+| ---------------- | ---- | ---------------------------------------------- |
+| **label**        | Map  | The edge label.                                |
+| **propertyName** | Map  | The property value of the edge, if one exists. |
+
+#### Node Steps
+
+Steps available from an instance of [`GNode`](https://github.com/joernio/flatgraph/blob/92f4cc4b84bf6b8315971128995a75872376dcff/core/src/main/java/flatgraph/GNode.java).
+
+| Name      | Type | Notes                                                |
+| --------- | ---- | ---------------------------------------------------- |
+| **graph** | Map  | The graph this node belongs to.                      |
+| **id**    | Map  | The node identifier.                                 |
+| **label** | Map  | The node label.                                      |
+| **start** | Map  | Wraps this node in an iterator to begin a traversal. |
