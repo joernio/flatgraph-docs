@@ -12,6 +12,85 @@ There are also more advanced steps like `repeat` and advanced features like path
 flatgraph traversals are based on Scala's Iterator, so you can also use all regular [collection methods](https://docs.scala-lang.org/scala3/book/collections-methods.html). If you want to begin a traversal from a given node, the `.start` method will wrap that node in a traversal making the traversal steps available.
 {{% /notice %}}
 
+## Step Types
+
+The various traversal queries can be divided into a number of types: Filter, Map, Side Effect, and Terminal.
+
+### Filter Steps
+
+_Filter Steps_ are atomic traversals that filter nodes according to given criteria. The most common filter step is aptly-named `filter`,  which continues the traversal in the step it suffixes for all nodes which pass its criterion. Its criterion is represented by a lambda function which has access to the node of the previous step and returns a boolean.  Continuing with the previous example, let us execute a query which returns all `METHOD` nodes of the Code Property Graph for [`X42`](https://github.com/ShiftLeftSecurity/x42.git), but only if their `IS_EXTERNAL` property is set to `false`:
+
+```java
+joern> cpg.method.filter(_.isExternal == false).name.toList 
+res11: List[String] = List("main")
+```
+
+{{% notice tip %}}
+A note on Scala lambda functions:
+In the example above, we used the lambda function `_.isExternal == false` as the predicate for the filter.
+The `_` is simply syntactic sugar referring to the parameter of the function, so this could be rewritten
+as `method => method.isExternal == false`.
+{{% /notice %}}
+
+Dissecting this query, we have `cpg` as the root object, a node-type step `method` which returns all nodes of type `METHOD`, a filter step `where(_.isExternal == false)` which continues the traversal only for nodes which have their `IS_EXTERNAL` property set to `false` (with `_` referencing the individual nodes, and `isExternal` a property directive which accesses their `IS_EXTERNAL` property), followed by  a property directive `name` which returns the values of the `NAME` property of the nodes that passed the _Filter Step_, and finally an _Execution Directive_ `toList` which executes the traversal and returns the results in a list.
+
+A shorter version of a query which returns the same results as the one above can be written using a _Property-Filter Step_. Property-filter steps are _Filter Steps_ which continue the traversal only for nodes which have a specific value in the property the _Property Filter Step_ refers to:
+
+```java
+joern> cpg.method.isExternal(false).name.toList 
+res11: List[String] = List("main")
+```
+
+Dissecting the query again, `cpg` is the root object, `method` is a node-type step, `isExternal(false)` is a property-filter step that filters for nodes which have `false` as the value of their `IS_EXTERNAL` property, `name` is a property directive, and `toList` is the execution directive you are already familiar with.
+
+{{% notice tip %}}
+Be careful not to mix up property directives with property-filter steps, they look awfully similar.
+Consider that:
+
+a) `cpg.method.isExternal(true).name.toList` returns all `METHOD` nodes which have the `IS_EXTERNAL` property set to `true` (in this case, 10 results)
+
+b) `cpg.method.isExternal.toList` returns the value of the `IS_EXTERNAL` property for all `METHOD` nodes in the graph (12 results)
+
+c) `cpg.method.isExternal.name.toList` is an invalid query which will not execute
+{{% /notice %}}
+
+A final _Filter Step_ we will look at is named `where`. Unlike `filter`, this doesn't take a simple predicate `A => Boolean`, but instead takes a `Traversal[A] => Traversal[_]`. I.e. you supply a traversal which will be executed at the current position. The resulting Traversal will preserves elements if the provided traversal has _at least one_ result. The previous query that used a _Property Filter Step_ can be re-written using `where` like so:
+
+```java
+joern> cpg.method.where(_.isExternal(false)).name.toList 
+res24: List[String] = List("main")
+```
+
+Maybe not particularly useful-seeming given this specific example, but keep it in the back of your head, because `filter` is a handy tool to have in the toolbox. Next up, _Map Steps_.
+
+### Map Steps
+
+_Map Steps_ are traversals that map a set of nodes into a different form given a function. _Map Steps_ are a powerful mechanism when you need to transform results to fit your specifics. For example, say you'd like to return both the `IS_EXTERNAL` and the `NAME` properties of all `METHOD` nodes in `X42`'s Code Property Graph. You can achieve that with the following query:
+
+```java
+joern> cpg.method.map(node => (node.isExternal, node.name)).toList
+res6: List[(Boolean, String)] = List(
+  (false, "main"),
+  (true, "fprintf"),
+  (true, "exit"),
+  (true, "<operator>.logicalAnd"),
+  (true, "<operator>.equals"),
+  (true, "<operator>.greaterThan"),
+  (true, "strcmp"),
+  (true, "<operator>.indirectIndexAccess"),
+  (true, "printf")
+)
+```
+
+Don't be intimidated by the syntax used in the `map` _Step_ above. If you examine `map(node => (node.isExternal, node.name))` for a bit, you might be able to infer that the first `node` simply defines the variable that represents the node which preceeds the `map` _Step_, that the ASCII arrow `=>` is just syntax that preceeds the body of a lambda function, and that `(node.isExternal, node.name)` means that the return value of the lambda is a list which contains the value of the `isExternal` and `name` _Property Directives_ for each of the nodes matched in the previous step and also passed into the lambda. In most cases in which you need `map`, you can simply follow the pattern above. But should you ever feel constrained by the common pattern shown, remember that the function for the `map` step is written in the Scala programming language, a fact which opens up a wide range of possibilities if you invest a little time learning the language.
+
+### Side Effect Steps
+
+_Side Effect Steps_ are traversal steps that perform an action or modify the state of the traversal without altering the path of the traversal itself. They do not directly contribute to the results that are returned, but they might be used to store information, log data, or manipulate variables during traversal. These steps can be thought of as adding "side effects" to the traversal that can be useful for various purposes like counting, aggregating, or modifying data.
+
+### Terminal Steps
+
+_Terminal Steps_ are steps that end the traversal and return the final result. Once a terminal step is reached, the traversal is considered complete, and it provides the output in some form (e.g., a list, a set, or a single element). Unlike intermediate steps that continue building the traversal, terminal steps execute the traversal and stop further processing. After a terminal step, the traversal cannot be continued or extended; it’s finished.
 
 ## Traversal Steps
 
@@ -82,7 +161,7 @@ When starting the traversal from an `Iterator` of nodes [`Edge`](https://github.
 | **src** | Map  | Traverse to the source node (out-going node).     |
 | **dst** | Map  | Traverse to the destination node (incoming node). |
 
-## Entity Steps
+## Property Directives
 
 The steps described below are available when called on the entity/object directly. These are available as methods or properties on the objects so no import is necessary.
 
@@ -116,4 +195,3 @@ Steps available from an instance of [`GNode`](https://github.com/joernio/flatgra
 | **graph** | Map  | The graph this node belongs to.                      |
 | **id**    | Map  | The node identifier.                                 |
 | **label** | Map  | The node label.                                      |
-| **start** | Map  | Wraps this node in an iterator to begin a traversal. |
