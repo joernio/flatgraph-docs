@@ -104,7 +104,6 @@ We tried to streamline the dependency tree as much as possible: flatgraph-core m
     * also describe .start step
 * algorithms: e.g. shortest path
 * import/export formats
-* benchmarks: copy from readme
 * logo: 
   * generate one? similar to joern? asked fabs
   * replace / get rid of the relearn logo
