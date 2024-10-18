@@ -4,9 +4,15 @@ title = 'flatgraph'
 theme = 'relearn'
 
 [params]
-  themeVariant = 'learn'
-  disableLandingPageButton = true
+  themeVariant = 'learn-customized'
+  disableLandingPageButton = false
+  landingPageName = 'Overview'
+  showVisitedLinks = false
   disableShortcutsTitle = true
+  disableInlineCopyToClipBoard=true
+  disableToc = false
+  disableBreadcrumb = true
+  disableNextPrev = true
 
 [[menu.shortcuts]]
   name = "<i class='fa-fw fab fa-github'></i> GitHub repo"
