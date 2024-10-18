@@ -1,6 +1,7 @@
 +++
 archetype = "home"
-title = "flatgraph"
+title = "Overview"
+weight = 1
 +++
 
 [flatgraph](https://github.com/joernio/flatgraph) is a fast and memory efficient columnar graph database with a framework to generate domain specific and typesafe traversals. 

@@ -1,0 +1,10 @@
+@import "theme-learn.css";
+
+:root {
+    --MENU-HEADER-BORDER-color: var(--MENU-SECTIONS-BG-color); /*Color of menu header border */
+}
+
+#R-topics {
+    /* override value from theme.css - no padding between home and menu items */
+    padding-top: 0rem;
+}
