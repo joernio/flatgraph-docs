@@ -25,7 +25,7 @@ flatgraph is developed and maintained as the underlying database for the code an
 
 ## Glimpse of a simple use case
 We have a history in [tinkerpop](https://tinkerpop.apache.org), so allow us to use a very simple graph domain from there to show how to get started with flatgraph. Working code is typically better than prose: the full setup is part of the tests in the [flatgraph repository](https://github.com/joernio/flatgraph).
-{{< figure src="/grateful-dead-schema.png" caption="grateful dead sample domain">}}
+{{< figure src="/grateful-dead-schema.png" caption="grateful dead sample domain" width="600px">}}
 
 Excerpt from the [GratefulDead domain schema](https://github.com/joernio/flatgraph/blob/44005cf16373dfaf629da8628071ebbfaf02b551/test-schemas/src/main/scala/flatgraph/testdomains/GratefulDead.scala):
 ```scala
@@ -42,7 +42,9 @@ song.addOutEdge(
   stepNameOut = "sungBy", 
   stepNameIn = "sang")
 ```
-The code generator takes the schema as input and generates [domain specific classes](https://github.com/joernio/flatgraph/tree/44005cf16373dfaf629da8628071ebbfaf02b551/test-schemas-domain-classes/src/main/scala/testdomains/gratefuldead) that can e.g. be used like this:
+
+The code generator takes the schema as input and generates [domain specific classes](https://github.com/joernio/flatgraph/tree/44005cf16373dfaf629da8628071ebbfaf02b551/test-schemas-domain-classes/src/main/scala/testdomains/gratefuldead) that can e.g. be used as follows:
+
 ```scala
 val gratefulDead = GratefulDead.empty
 
@@ -61,7 +63,20 @@ gratefulDead.artist.name.sorted shouldBe List("Bo_Diddley", "Garcia")
 gratefulDead.artist.name("Garcia").sang.name.l shouldBe List("HEY BO DIDDLEY")
 gratefulDead.song.writtenBy.name.l shouldBe List("Bo_Diddley")
 ```
-Note that the properties (e.g. `name` and `performances`) have the respective types as defined in the schema, and relationships between nodes have named steps, e.g. `sang`. If you didn't provide a name for a relationship, there are some alternative auto-generated options like `sungbyOut` and `artistViaSungbyOut`.
+
+{{% notice note %}}
+By defining your domain in a schema we enable the compiler to help us write domain-specific code, i.e. the compiler ensures that our traversals are valid and we also get domain-specific code completion. Additionally, we ensure that no schema-invalid graph can be constructed. 
+{{% /notice %}}
+Some examples for what return types the compiler derives, based on the information given in the schema:
+* `gratefulDead.artist: Iterator[Artist]`
+* `gratefulDead.artist.name: Iterator[String]`
+* `gratefulDead.artist.name("Garcia"): Iterator[Artist]` - note that `name(String)` is a filter step
+* `gratefulDead.song.performances: Iterator[Int]`
+* `gratefulDead.artist.performances` does not compile
+* `gratefulDead.song.writtenBy: Iterator[Artist]`
+* `gratefulDead.artist.writtenBy` does not compile
+
+If you didn't provide a name for a relationship in the schema definition, there are some alternative auto-generated options like `sungbyOut` and `artistViaSungbyOut`.
 The full working test is [here](https://github.com/joernio/flatgraph/blob/92f4cc4b84bf6b8315971128995a75872376dcff/tests/src/test/scala/flatgraph/GratefulDeadTests.scala).
 
 ## Memory footprint

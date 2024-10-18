@@ -3,7 +3,7 @@ title = "Benchmarks"
 weight = 4
 +++
 
-In the past, many initial attempts at marrying a graph database with static analysis was done with TinkerGraph or Neo4j (see [Related Work](_index.md/#related-work)), however these databases have been proven to be slow and inefficient. This was motivation enough to create [OverfowDB](https://github.com/ShiftLeftSecurity/overflowdb), and now [flatgraph](https://github.com/joernio/flatgraph).
+In the past, many initial attempts at marrying a graph database with static analysis was done with TinkerGraph or Neo4j (see [Related Work](_index.md/#related-work)), however these databases have been proven to be slow and inefficient. This was motivation enough to create [OverflowDB](https://github.com/ShiftLeftSecurity/overflowdb), and now [flatgraph](https://github.com/joernio/flatgraph).
 
 Below are benchmarks measuring various properties of how each database performs.
 
