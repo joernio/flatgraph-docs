@@ -9,7 +9,7 @@ theme = 'relearn'
   disableShortcutsTitle = true
 
 [[menu.shortcuts]]
-  name = "<i class='fa-fw fab fa-github'></i> GitHub repo"
+  name = "<i class='fa-fw fab fa-github'></i> git repository"
   url = "https://github.com/joernio/flatgraph"
   weight = 10
 
