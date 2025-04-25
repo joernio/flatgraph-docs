@@ -20,6 +20,6 @@ theme = 'relearn'
   weight = 10
 
 [[menu.shortcuts]]
-  name = "<img src='https://maven-badges.herokuapp.com/maven-central/io.joern/flatgraph-core_3/badge.svg' alt='latest release' />"
-  url = "https://maven-badges.herokuapp.com/maven-central/io.joern/flatgraph-core_3"
+  name = "<img src='https://img.shields.io/maven-central/v/io.joern/flatgraph-core_3' alt='latest release' />"
+  url = "https://repo1.maven.org/maven2/io/joern/flatgraph-core_3/"
   weight = 20
