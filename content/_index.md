@@ -4,14 +4,15 @@ title = "Overview"
 weight = 1
 +++
 
-[flatgraph](https://github.com/joernio/flatgraph) is a fast and memory efficient columnar graph database with a framework to generate domain specific and typesafe traversals. 
-Model your domain in flatgraph's schema builder ([examples](https://github.com/joernio/flatgraph/tree/master/test-schemas/src/main/scala/flatgraph/testdomains)) and the code generator will generate all required classes and steps required to traverse your domain in a graph as well persistence. Note: flatgraph is not supposed to be a full ACID compliant database - our design goals are efficiency, minimalism, simplicity and rapid prototyping. 
+[flatgraph](https://github.com/joernio/flatgraph) is a fast and memory efficient columnar graph database on the JVM (written in [Scala 3](https://www.scala-lang.org/)) with a framework to generate domain specific and typesafe traversals. Our design goals are efficiency, minimalism, simplicity and rapid prototyping - flatgraph is not fully ACID compliant.
 
-flatgraph is developed and maintained as the underlying database for the code analysis platform [joern](https://joern.io) as well as [qwiet.ai's](https://qwiet.ai/) proprietary static code analysis tools. Many design decisions were driven by the needs of code analysis, but flatgraph is useful for other domains as well, and since we love open source (and hope to get bug reports and feature contributions back), we decided to share it with the world. 
+You can model your domain in flatgraph's schema builder ([examples](https://github.com/joernio/flatgraph/tree/master/test-schemas/src/main/scala/flatgraph/testdomains)) and the code generator will generate all required classes and steps required to traverse your domain in a graph as well persistence. 
+
+flatgraph is developed and maintained as the underlying database for the code analysis platform [joern](https://joern.io) as well as [qwiet.ai's](https://qwiet.ai/) proprietary static code analysis services. Many design decisions were driven by those, but flatgraph itself is domain-agnostic.
 
 ## Main characteristics / design decisions
-* runs locally in a JVM (written in [Scala 3](https://www.scala-lang.org/))
-* provides a DSL to model your domain-specific graph schema
+* runs locally in a JVM 
+* user-friendly DSL to model your domain-specific graph schema
 * code generator creates a domain specific typesafe query language
 * code generator can be used programmatically or as an sbt plugin
 * memory and storage efficient: see memory footprint
